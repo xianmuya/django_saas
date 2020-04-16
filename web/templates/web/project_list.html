@@ -1,0 +1,78 @@
+{% extends 'web/layout/manage.html' %}
+{% load static %}
+
+{% block title %} 首页 {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid project">
+        <div style="margin: 10px 0;">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新建项目
+            </a>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">新建项目</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form id="addForm">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                <span class="error-msg"></span>
+                            </div>
+                        {% endfor %}
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button id="btnSubmit" type="button" class="btn btn-primary">确 定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(function () {
+            bindBtnSubmit();
+        });
+        function bindBtnSubmit() {
+            $("#btnSubmit").click(function () {
+                $(".error-msg").empty();
+                $.ajax({
+                url:"{% url "project_list" %}",
+                type: 'POST',
+                dataType: 'JSON',
+                data: $("#addForm").serialize(),
+                success:function (res) {
+                    if(res.status){
+                        console.log(1);
+                        location.href = location.href;
+                    }else {
+                        $.each(res.error, function (key, value) {
+                            $("#id_"+key).next().text(value[0]);
+                        })
+                    }
+                }
+            })
+            });
+
+        }
+    </script>
+{% endblock %}
