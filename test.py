@@ -83,3 +83,14 @@
 #     except Exception as e:
 #         print(e)
 # not_zero(0)
+# from itertools import permutations
+# print(list(permutations('faa')))
+import bisect #二分查找模块
+# import collections
+# conn = collections.defaultdict(list)
+# print(type(conn))
+# c = {'fa':5}
+#
+# print(c[])
+# print(conn['a'])
+# print(conn)

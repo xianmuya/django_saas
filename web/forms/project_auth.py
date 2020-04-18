@@ -5,17 +5,20 @@ from web import models
 from django import forms
 from web.forms.bootstrap import Bootstarp
 from django.core.exceptions import ValidationError
+from web.forms.widgets import ColorRadioSelect
+
 
 
 class ProjectList(Bootstarp, forms.ModelForm):
     '''新建项目字段验证'''
-
+    bootstrap_class_exclude = ['color']
     # desc = forms.CharField(widget=forms.Textarea, label='项目描述')
     class Meta:
         model = models.Project
         fields = ['name', 'color', 'desc']
         widgets = {
-            'desc': forms.Textarea,  # modelform下可以直接定制widgets插件，可以不用重写字段
+            'desc': forms.Textarea,
+            'color': ColorRadioSelect(attrs={'class': 'color-radio'})# modelform下可以直接定制widgets插件，可以不用重写字段
         }
 
     def __init__(self, request, *args, **kwargs):

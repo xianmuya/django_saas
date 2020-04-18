@@ -140,12 +140,13 @@ CACHES = {
             "CONNECTION_POOL_KWARGS": {
                 "max_connections": 100,
                 "encoding": 'utf-8',
-                # "PASSWORD": "a7081919",# redis密码
+                # "PASSWORD": "xxxxx",# redis密码
             },
             "PASSWORD": 'xxxx',
         }
     }
 }
+'''url 白名单 不用验证即可访问'''
 WHITE_REGEX_URL_LIST = [
     "/register/",
     "/send/sms/",

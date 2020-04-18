@@ -81,7 +81,6 @@ class Project(models.Model):
     bucket = models.CharField(verbose_name='cos桶', max_length=128)
     region = models.CharField(verbose_name='cos区域', max_length=32)
 
-
     # project_user = models.ManyToManyField(to='UserInfo',through="ProjectUser",through_fields=('project','user'))
 
 
@@ -92,3 +91,11 @@ class ProjectUser(models.Model):
     star = models.BooleanField(verbose_name='星标', default=False)
 
     create_datetime = models.DateTimeField(verbose_name='加入时间', auto_now_add=True)
+
+
+class Wiki(models.Model):
+    '''文档表'''
+    project = models.ForeignKey(to='Project', verbose_name='项目')
+    title = models.CharField(verbose_name='标题', max_length=32)
+    content = models.TextField(verbose_name='内容')
+    parent = models.ForeignKey(verbose_name='上一级文章', null=True, blank=True, to='self', related_name='children')  # 自关联

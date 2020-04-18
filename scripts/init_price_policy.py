@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import base
 from web import models
-'''离线脚本'''
+'''离线脚本 生成数据库默认数据'''
 
 def run():
     exists = models.PricePolicy.objects.filter(category=1, title="个人免费版").exists()

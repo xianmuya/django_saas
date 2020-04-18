@@ -1,0 +1,68 @@
+{% extends 'web/layout/manage.html' %}
+{% block title %}
+    wiki文档编辑
+{% endblock %}
+
+{% block css %}
+    <style>
+        .panel-heading {
+            font-size: 30px;
+        }
+
+        .panel-default {
+            margin-top: 10px;
+        }
+
+        .panel-body {
+            padding: 0;
+
+        }
+
+        .content {
+            text-align: center;
+            min-height: 600px;
+            margin-left: -1px;
+            border-left: 1px solid #dddddd;
+        }
+
+        .title-list {
+            min-height: 500px;
+            border-right: 1px solid #dddddd;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                wiki文档
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-3 title-list">
+                    <div style="text-align: center">
+                        <h2>目录</h2>
+                    </div>
+
+                </div>
+                <div class="col-sm-9 content">
+                    <div style="margin-top: 50px">
+                        <h1>《{{ request.tracer.project.name }}》wiki文档库</h1>
+                        <a href="{% url 'wiki_add' project_id=request.tracer.project.id %}" style="font-size: 30px">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i><h2 style="display: inline-block">新建文档</h2>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+
+
+{% endblock %}

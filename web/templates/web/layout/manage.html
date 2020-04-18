@@ -1,4 +1,5 @@
 {% load static %}
+{% load project %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'plugin/font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/manage.css' %}">
     <style>
-        .error-msg{
+        .error-msg {
             color: red;
         }
     </style>
@@ -32,13 +33,13 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-{#            <ul class="nav navbar-nav">#}
-{#                {% all_project_list request %}#}
-{##}
-{#                {% if request.tracer.project %}#}
-{#                    {% manage_menu_list request %}#}
-{#                {% endif %}#}
-{#            </ul>#}
+            <ul class="nav navbar-nav">
+                {% all_project_list request %}
+
+                {% if request.tracer.project %}
+                    {% manage_menu_list request %}
+                {% endif %}
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">工作台</a></li>
