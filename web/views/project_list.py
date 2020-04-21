@@ -1,10 +1,12 @@
+# !/usr/bin/env python
 # _ author : Administrator
-# date : 2020/4/16
 # -*- coding:utf-8 -*-
 from django.shortcuts import redirect, render, HttpResponse
 from web.forms import project_auth
 from django.http import JsonResponse
 from web import models
+from utils.tencent.cos import create_bucket
+import time
 
 
 def project(request):
@@ -44,10 +46,30 @@ def project(request):
         '''ajax提交项目逻辑'''
         form = project_auth.ProjectList(request, data=request.POST)
         if form.is_valid():
+            name = form.cleaned_data['name']
+            # 1. 为项目创建一个桶
+            bucket = "{}-{}-1301848135".format(request.tracer.user.mobile_phone, str(int(time.time())))
+            region = 'ap-chengdu'
+            create_bucket(bucket, region)
+
+            # 2.创建项目
+            # 验证通过：项目名、颜色、描述 + creator谁创建的项目？
+            form.instance.bucket = bucket
+            form.instance.region = region
             form.instance.creator = request.tracer.user
-            form.save()
-            # print(1)
+            instance = form.save()
+
+            # 3.项目初始化问题类型
+            issues_type_object_list = []
+            for item in models.IssuesType.PROJECT_INIT_LIST:  # ["任务", '功能', 'Bug']
+                issues_type_object_list.append(models.IssuesType(project=instance, title=item))
+            models.IssuesType.objects.bulk_create(issues_type_object_list)
+
             return JsonResponse({'status': True})
+            # form.instance.creator = request.tracer.user
+            # form.save()
+            # print(1)
+
         return JsonResponse({'status': False, 'error': form.errors})
 
 

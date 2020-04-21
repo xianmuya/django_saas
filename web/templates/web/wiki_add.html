@@ -1,9 +1,5 @@
 {% extends 'web/layout/manage.html' %}
 {% load static %}
-{% block title %}
-    wiki文档编辑
-{% endblock %}
-
 {% block css %}
     <link rel="stylesheet" href="{% static 'plugin/editor-md/css/editormd.min.css' %}">
     <style>
@@ -45,11 +41,11 @@
             z-index: 1001;
         }
     </style>
-
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div>
@@ -98,12 +94,65 @@
                 <div></div>
             </div>
         </div>
+
     </div>
-
-
 {% endblock %}
 
 {% block js %}
+    <script src="{% static 'plugin/editor-md/editormd.min.js' %}"></script>
+    <script>
+
+        // http://127.0.0.1:8002/manage/2/wiki/detail/
+        var WIKI_DETAIL_URL = "{% url 'wiki' project_id=request.tracer.project.id %}";
+        var WIKI_UPLOAD_URL = "{% url 'wiki_upload' project_id=request.tracer.project.id %}";
+
+        $(function () {
+
+            initCatalog();
+            initEditorMd();
+        });
+
+        /*
+        初始化markdown编辑器（textare转换为编辑器）
+         */
+        function initEditorMd() {
+            editormd('editor', {
+                placeholder: "请输入内容",
+                height: 500,
+                path: "{% static 'plugin/editor-md/lib/' %}",
+                imageUpload:true,
+                imageFormats:["jpg",'jpeg','png','gif'],
+                imageUploadURL:WIKI_UPLOAD_URL
+
+            })
+        }
 
 
+        function initCatalog() {
+            $.ajax({
+                url: "{% url 'wiki_catalog' project_id=request.tracer.project.id %}",
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.status) {
+                        $.each(res.data, function (index, item) {
+                            var href = WIKI_DETAIL_URL + "?wiki_id=" + item.id;
+                            var li = $("<li>").attr('id', "id_" + item.id).append($('<a>').text(item.title).attr('href', href)).append($('<ul>'));
+
+                            if (!item.parent_id) {
+                                // 添加到catalog中
+                                $('#catalog').append(li);
+                            } else {
+                                $("#id_" + item.parent_id).children('ul').append(li);
+                            }
+                        })
+                    } else {
+                        alert("初始化目录失败");
+                    }
+                }
+            })
+        }
+
+
+    </script>
 {% endblock %}

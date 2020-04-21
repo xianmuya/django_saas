@@ -1,5 +1,5 @@
 # _ author : Administrator
-# date : 2020/4/14
+
 from django.contrib import admin
 from django.conf.urls import url, include
 from saas import views,tests

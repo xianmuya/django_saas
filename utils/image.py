@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 # _ author : Administrator
-# date : 2020/4/15
+
 # -*- coding:utf-8 -*-
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random

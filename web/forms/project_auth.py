@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # _ author : Administrator
-# date : 2020/4/16
 # -*- coding: utf-8 -*-
 from web import models
 from django import forms

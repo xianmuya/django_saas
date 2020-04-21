@@ -1,5 +1,4 @@
 # _ author : Administrator
-# date : 2020/4/13
 # def foo():
 #     for i in range(5):
 #         yield i
@@ -85,7 +84,7 @@
 # not_zero(0)
 # from itertools import permutations
 # print(list(permutations('faa')))
-import bisect #二分查找模块
+# import bisect #二分查找模块
 # import collections
 # conn = collections.defaultdict(list)
 # print(type(conn))
@@ -94,3 +93,19 @@ import bisect #二分查找模块
 # print(c[])
 # print(conn['a'])
 # print(conn)
+# import requests
+# v = [1, 2, 5]
+# print(id(v))
+# del v
+# v2 = [7, 8, 9]
+# print(id(v2))
+# v1 = (1, 2)
+# print(id(v1))
+# del v1
+# v2 = v1
+# print(id(v2))
+# a = 'fsafs'
+# # # print(id(a))
+# # # del a
+# # # b = 'fsafs'
+# # # print(id(b))

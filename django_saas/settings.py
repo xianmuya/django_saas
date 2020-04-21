@@ -104,13 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -131,6 +131,16 @@ TENCENT_SMS_TEMPLATE = {
     'login': 1111111111,
 }
 
+# 腾讯云COS内容
+TENCENT_COS_ID = "cos秘钥"
+TENCENT_COS_KEY = "cos秘钥"
+'''阿里支付配置'''
+ALI_GATEWAY = 'xxx'
+ALI_APPID = 'xxx'
+ALI_NOTIFY_URL = 'xxx'
+ALI_RETURN_URL = 'xxx'
+# ALI_PUB_KEY_PATH = ''
+ALI_PRI_KEY_PATH = 'xxx'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",

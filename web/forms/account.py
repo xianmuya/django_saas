@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # _ author : Administrator
-# date : 2020/4/14
 ''' 用户登录验证，注册，重置密码，注销等功能表单验证'''
 from django.shortcuts import render, HttpResponse
 import random

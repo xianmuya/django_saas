@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# _ author : Administrator
 # -*- coding:utf-8 -*-
 
 from django.forms import RadioSelect

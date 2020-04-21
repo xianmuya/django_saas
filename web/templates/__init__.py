@@ -1,2 +1,2 @@
+#!/usr/bin/env python
 # _ author : Administrator
-# date : 2020/4/14

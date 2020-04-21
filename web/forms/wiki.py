@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# _ author : Administrator
 # -*- coding:utf-8 -*-
 from django import forms
 
@@ -9,7 +10,7 @@ from web.forms.bootstrap import Bootstarp
 class WikiModelForm(Bootstarp, forms.ModelForm):
     class Meta:
         model = models.Wiki
-        exclude = ['project', ]
+        exclude = ['project', 'depth']
 
     def __init__(self, request, *args, **kwargs):
         super().__init__(*args, **kwargs)

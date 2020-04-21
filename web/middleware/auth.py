@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # _ author : Administrator
-# date : 2020/4/16
 # -*- coding:utf-8 -*-
 '''django认证中间件'''
 from django.shortcuts import render, redirect
